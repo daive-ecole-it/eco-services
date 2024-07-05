@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+
 
 Route::get('/',[HomeController::class, 'home']);
 
@@ -19,4 +21,21 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 route::get('admin/dashboard',[HomeController::class, 'index'])->
+    middleware(['auth','admin']);
+
+route::get('view_category',[AdminController::class, 'view_category'])->
+    middleware(['auth','admin']);
+route::post('add_category',[AdminController::class, 'add_category'])->
+    middleware(['auth','admin']);
+route::get('delete_category/{id}',[AdminController::class, 'delete_category'])->
+    middleware(['auth','admin']);
+route::get('edit_category/{id}',[AdminController::class, 'edit_category'])->
+    middleware(['auth','admin']);
+route::post('update_category/{id}',[AdminController::class, 'update_category'])->
+    middleware(['auth','admin']);
+route::get('add_product',[AdminController::class, 'add_product'])->
+    middleware(['auth','admin']);
+route::post('upload_product',[AdminController::class, 'upload_product'])->
+    middleware(['auth','admin']);
+route::get('view_product',[AdminController::class, 'view_product'])->
     middleware(['auth','admin']);
