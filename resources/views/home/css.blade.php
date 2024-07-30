@@ -20,6 +20,6 @@
  <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css') }}" />
 
  <!-- Custom styles for this template -->
- <link href="{{ ('css/style.css') }}" rel="stylesheet" />
+ <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
  <!-- responsive style -->
- <link href="{{ ('css/responsive.css') }}" rel="stylesheet" />
+ <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" />

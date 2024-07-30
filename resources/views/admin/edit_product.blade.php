@@ -8,7 +8,7 @@
             justify-content: center;
             align-items: center;
             margin: 60px;
-            
+
         }
         h1{
             color:white;
@@ -24,7 +24,7 @@
             height:50px;
         }
         textarea[type='text']{
-            width:450px;
+            width:500px;
             height:80px;
         }
         .input_deg{
@@ -41,32 +41,38 @@
       <div class="page-content">
         <div class="page-header">
           <div class="container-fluid">
-           <h1>Add Product</h1>
+           <h1>Edit : {{ $data->title }}</h1>
+           @if ($data->image)
+               <img src="{{ asset('products/'.$data->image)}}" alt="Product Image" style="width: 200px; height: 200px;display: flex;
+            justify-content: center!important;">
+           @else
+                <h4>not Image</h4>
+           @endif
             <div class="div_deg">
-                <form action="{{url('upload_product')}}" method="Post" enctype="multipart/form-data">
+                <form action="{{url('update_product',$data->id)}}" method="Post" enctype="multipart/form-data">
 
                     @csrf
-                    
+
                     <div class="input_deg">
                         <label for="name">title</label>
-                        <input type="text" name="title">
+                        <input type="text" name="title" value="{{ $data->title }}">
                     </div>
                     <div class="input_deg">
                         <label for="name">Description</label>
-                        <textarea name="description" type="text"></textarea>
+                        <textarea type="text" name="description">{{ $data->description }}</textarea>
                     </div>
                     <div class="input_deg">
                         <label for="name">Price</label>
-                        <input type="text" name="price">
+                        <input type="text" name="price" value="{{ $data->price }}">
                     </div>
                     <div class="input_deg">
                         <label for="name">Quantity</label>
-                        <input type="number" name="qty">
+                        <input type="number" name="qty" value="{{ $data->quantity }}">
                     </div>
                     <div class="input_deg">
                         <label for="name">Product Category</label>
                         <select name="category" required>
-                            <option value="">Select Category</option>
+                            <option value="{{ $data->category }}">{{ $data->category }}</option>
                             @foreach ($category as $category)
                             <option value="{{ $category->category_name}}">{{ $category->category_name}}</option>
                             @endforeach
@@ -77,8 +83,8 @@
                         <input type="file" name="image">
                     </div>
                     <div class="input_deg">
-                        
-                        <input class="btn btn-success" type="submit" value="Add Product">
+
+                        <input class="btn btn-success" type="submit" value="Eddit Product">
                     </div>
                 </form>
             </div>

@@ -5,12 +5,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/dashboard', [HomeController::class, 'login_home'])
+    ->middleware(['auth','verified'])
+    ->name('dashboard');
 
-Route::get('/',[HomeController::class, 'home']);
-
-Route::get('/dashboard', function () {
-    return view('home.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/myorders', [HomeController::class, 'myorders'])
+    ->middleware(['auth','verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,3 +40,37 @@ route::post('upload_product',[AdminController::class, 'upload_product'])->
     middleware(['auth','admin']);
 route::get('view_product',[AdminController::class, 'view_product'])->
     middleware(['auth','admin']);
+route::get('edit_product/{id}',[AdminController::class, 'edit_product'])->
+    middleware(['auth','admin']);
+route::get('delete_product/{id}',[AdminController::class, 'delete_product'])->
+    middleware(['auth','admin']);
+route::post('update_product/{id}',[AdminController::class, 'update_product'])->
+    middleware(['auth','admin']);
+route::get('search_product',[AdminController::class, 'search_product'])->
+    middleware(['auth','admin']);
+// Home Controller routes
+
+route::get('product_details/{id}',[HomeController::class, 'product_details']);
+
+route::get('add_to_cart/{id}',[HomeController::class, 'add_to_cart'])
+->middleware(['auth', 'verified']);
+
+route::get('mycart',[HomeController::class, 'mycart'])
+->middleware(['auth', 'verified']);
+
+route::get('remove_from_cart/{id}',[HomeController::class, 'remove_from_cart'])
+->middleware(['auth', 'verified']);
+
+route::post('confirm_order',[HomeController::class, 'confirm_order'])
+->middleware(['auth', 'verified']);
+
+route::get('view_orders',[AdminController::class, 'view_orders'])
+-> middleware(['auth','admin']);
+
+route::get('on_the_way/{id}',[AdminController::class, 'on_the_way'])
+-> middleware(['auth','admin']);
+route::get('delivered/{id}',[AdminController::class, 'delivered'])
+-> middleware(['auth','admin']);
+route::get('print_pdf/{id}',[AdminController::class, 'print_pdf'])
+-> middleware(['auth','admin']);
+

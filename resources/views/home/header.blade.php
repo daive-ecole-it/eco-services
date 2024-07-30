@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg custom_nav-container ">
       <a class="navbar-brand" href="index.html">
         <span>
-          Giftos
+          Eco-services
         </span>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav  ">
           <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="shop.html">
@@ -37,9 +37,14 @@
             @if (Route::has('login'))
 
                 @auth
-                    <a href="">
-                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                    <a href="{{ url('myorders') }}">
+                        My Orders
                     </a>
+                    <a href="{{ url('mycart') }}">
+                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                        [{{ $count }}]
+                    </a>
+
                     {{-- <form class="form-inline ">
                         <button class="btn nav_search-btn" type="submit">
                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -49,7 +54,7 @@
                             @csrf
                                 <input class="btn btn-success" type="submit" value="logout" />
                         </form>
-                @else
+            @else
                     <a href="{{ url('/login') }}">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <span>

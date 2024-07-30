@@ -108,11 +108,12 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" 
-    integrity="sha256-9/aliU8dGd2tb
-    </script>
+    integrity="sha256-9/aliU8dGd2tb">
+</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js" 
     integrity="sha512-MqEDqB7me8klOYxXXQlB4LaNf9V9S0+sG1i8LtPOYmHqICuEZ9ZLbyV3qIfADg2UJcLyCm4fawNiFvnYbcBJ1w=="
      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+     
     <script src="{{ asset('/admincss/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('/admincss/vendor/popper.js/umd/popper.min.js') }}"> </script>
     <script src="{{ asset('/admincss/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
