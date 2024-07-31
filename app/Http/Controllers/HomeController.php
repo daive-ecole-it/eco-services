@@ -8,7 +8,8 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Stripe;
+use Session;
 class HomeController extends Controller
 {
     public function index(){
@@ -116,4 +117,57 @@ class HomeController extends Controller
         $count = Cart::where('user_id', $user_id)->get()->count();
         return view('home.order',compact('count','orders'));
     }
+
+    public function stripe($value)
+    {
+
+        return view('home.stripe',compact('value'));
+    }
+
+
+    public function stripePost(Request $request, $value)
+    {
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        Stripe\Charge::create ([
+                "amount" => $value * 100,
+                "currency" => "usd",
+                "source" => $request->stripeToken,
+                "description" => "Test payment from Eco-services"
+        ]);
+
+        $name = Auth::user()->name;
+
+        $address = Auth::user()->address;
+        $phone = Auth::user()->phone;
+
+
+        $user_id = Auth::user()->id;
+         $cart = Cart::where('user_id', $user_id)->get();
+
+         foreach ($cart as $carts) {
+             $order = new Order();
+             $order->user_id = $user_id;
+             $order->product_id = $carts->product_id;
+             $order->name = $name;
+             $order->rec_address = $address;
+             $order->phone = $phone;
+             $order->payment_status ="paid";
+             $order->save();
+         }
+          $cart_remove = Cart::where('user_id', $user_id)->get();
+
+         foreach($cart_remove as $remove)
+         {
+            $data = Cart::find($remove->id);
+            $data->delete();
+         }
+         toastr()
+         ->timeOut(1000)
+         ->closeButton()
+         ->success('Product ordered successfully.');
+         return redirect('mycart');
+    }
+
+
 }

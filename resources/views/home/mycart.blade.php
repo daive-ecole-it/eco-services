@@ -50,6 +50,9 @@
     padding: 18px;
  }
  .order_deg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding-right: 150px;
     margin-top:-30px
  }
@@ -73,6 +76,39 @@
   <!-- end hero area -->
 
 <div class="div_deg">
+        <table class="styled-table">
+            <tr>
+                <th>Product Title</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Remove</th>
+            </tr>
+
+            <?php
+                $value = 0;
+            ?>
+
+            @foreach ($cart as $cart )
+            <tr>
+                <td>{{ $cart->product->title }}</td>
+                <td>{{ $cart->product->price }}€</td>
+                <td>
+                    <img width="150px" src="/products/{{ $cart->product->image }}">
+                </td>
+                <td>
+                    <a class="btn btn-danger" onclick="confirmation(event)" href="{{ url('remove_from_cart',$cart->id) }}">Remove</a>
+                </td>
+                <?php
+                    $value = $value + $cart->product->price;
+            ?>
+            </tr>
+            @endforeach
+        </table>
+    </div>
+    <div class="cart_value">
+            <h3>Total Price: {{ $value }}€</h3>
+
+    </div>
     <div class="order_deg">
         <form action="{{ url('confirm_order') }}" method="Post">
             @csrf
@@ -90,43 +126,12 @@
                 <input type="text" name="phone" value="{{ Auth::user()->phone }}">
             </div>
             <div class="div_gap">
-                <input class="btn btn-primary" type="submit" value="Commander!">
+                <input class="btn btn-primary" type="submit" value="Cash On Delivery">
+                <a class="btn btn-success" href="{{ url('stripe',$value ) }}">Pay Using Card</a>
             </div>
-    </form>
+        </form>
 </div>
-    <table class="styled-table">
-        <tr>
-            <th>Product Title</th>
-            <th>Price</th>
-            <th>Image</th>
-            <th>Remove</th>
-        </tr>
 
-        <?php
-            $value = 0;
-        ?>
-
-        @foreach ($cart as $cart )
-         <tr>
-            <td>{{ $cart->product->title }}</td>
-            <td>{{ $cart->product->price }}€</td>
-            <td>
-                <img width="150px" src="/products/{{ $cart->product->image }}">
-            </td>
-            <td>
-                <a class="btn btn-danger" onclick="confirmation(event)" href="{{ url('remove_from_cart',$cart->id) }}">Remove</a>
-            </td>
-            <?php
-                $value = $value + $cart->product->price;
-          ?>
-          </tr>
-        @endforeach
-    </table>
-</div>
-<div class="cart_value">
-        <h3>Total Price: {{ $value }}€</h3>
-
-</div>
 
   <!-- info section -->
 

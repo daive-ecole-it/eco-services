@@ -8,20 +8,19 @@
                 <div class="col-md-7">
                   <div class="detail-box">
                     <h1>
-                      Welcome To Our <br>
-                      Gift Shop
+                        Bienvenue sur<br>
+                      Eco-Services
                     </h1>
                     <p>
-                      Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non necessitatibus error distinctio mollitia suscipit. Nostrum fugit doloribus consequatur distinctio esse, possimus maiores aliquid repellat beatae cum, perspiciatis enim, accusantium perferendis.
-                    </p>
+                       Eco-services est votre destination pour acheter des produits recyclés de haute qualité. Notre mission est de réduire les déchets en transformant les objets usagés en produits utiles et élégants. Explorez notre collection et rejoignez notre communauté engagée dans la protection de l'environnement.</p>
                     <a href="">
-                      Contact Us
+                      Contactez-nous
                     </a>
                   </div>
                 </div>
                 <div class="col-md-5 ">
                   <div class="img-box">
-                    <img style="width:600px" src="images/image3.jpeg" alt="" />
+                    <img style="width:500px" src="images/image3.jpeg" alt="" />
                   </div>
                 </div>
               </div>

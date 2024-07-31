@@ -55,12 +55,14 @@
                 <th>Delivery status</th>
                 <th>Image</th>
             </tr>
-            @foreach ($order as $order )
-            
-            @endforeach
+            @foreach ($orders as $order )
             <tr>
-
+                <td>{{ $order->product->title }}</td>
+                <td>{{ $order->product->price }} €</td>
+                <td>{{ $order->status }}</td>
+                <td><img src="{{ asset('products/'. $order->product->image) }}"></td></td>
             </tr>
+            @endforeach
         </table>
       </div>
 
