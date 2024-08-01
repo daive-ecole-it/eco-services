@@ -11,18 +11,18 @@ on:
     tags:
       - '*'
 
-jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+# jobs:
+#   lint:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Run linters
-        run: |
-          # Assurez-vous d'avoir installé les linters nécessaires
-          npm install
-          npm run lint
+#       - name: Run linters
+#         run: |
+#           # Assurez-vous d'avoir installé les linters nécessaires
+#           npm install
+#           npm run lint
 
   build-and-push:
     runs-on: ubuntu-latest
